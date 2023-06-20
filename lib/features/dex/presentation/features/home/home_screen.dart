@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/core/constants/pokedex_colors.dart';
+import 'package:pokedex/core/constants/pokedex_constants.dart';
 import 'package:pokedex/core/constants/pokedex_dimens.dart';
+import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_cubit.dart';
+import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_state.dart';
+import 'package:pokedex/features/dex/presentation/widgets/error_pokemon.dart';
+import 'package:pokedex/features/dex/presentation/widgets/no_pokemon_widget.dart';
 import 'package:pokedex/features/dex/presentation/widgets/pokemon_card.dart';
 import 'package:pokedex/features/dex/presentation/widgets/pokemon_list_container.dart';
-import 'package:pokedex/features/dex/presentation/widgets/pokemon_search_bar.dart';
+import 'package:pokedex/features/dex/presentation/widgets/search_bar/pokemon_search_bar.dart';
 import 'package:pokedex/features/dex/presentation/widgets/pokemon_title_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,15 +44,38 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(4),
-                  child: PokemonListContainer(
-                      child: GridView.builder(
-                    itemCount: 99,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                    ),
-                    itemBuilder: (context, index) => const PokemonCard(),
-                  )),
+                  child: BlocBuilder<HomeCubit, HomeState>(
+                    builder: (context, state) {
+                      return PokemonListContainer(child:
+                          BlocBuilder<HomeCubit, HomeState>(
+                              builder: (context, state) {
+                        if (state is EmptyHomeState) {
+                          return const NoPokemonYet();
+                        }
+                        if (state is LoadingHomeState) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (state is ErrorHomeState) {
+                          return const ErrorPokemonWidget();
+                        }
+                        if (state is SuccessHomeState) {
+                          return GridView.builder(
+                            itemCount: state.pokemons.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: PokemonConstants.colsPerRow,
+                            ),
+                            itemBuilder: (context, index) => PokemonCard(
+                              pokemon: state.pokemons[index],
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      }));
+                    },
+                  ),
                 ),
               ),
             ],

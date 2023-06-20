@@ -11,4 +11,7 @@ class PokemonResponse {
       url: json['url'],
     );
   }
+
+  @override
+  String toString() => 'PokemonResponse(name:$name, url: $url)';
 }

@@ -14,8 +14,10 @@ class PokemonResultResponse {
   });
 
   factory PokemonResultResponse.fromJson(Map<String, dynamic> json) {
-    final parsedPokemons =
-        json['pokemons']?.map((pokemon) => PokemonResponse.fromJson(pokemon));
+    final parsedPokemons = (json['results'] as List?)
+        ?.map((pokemon) => PokemonResponse.fromJson(pokemon))
+        .toList();
+
     return PokemonResultResponse(
       count: json['count'],
       next: json['next'],
@@ -25,6 +27,16 @@ class PokemonResultResponse {
   }
 
   List<Pokemon> toPokemonList() {
-    return pokemons.map((element) => Pokemon()).toList();
+    return pokemons.map((element) {
+      final url = element.url ?? '';
+      final matchedId =
+          RegExp(r'pokemon/([0-9]+)/').firstMatch(url)?.group(1) ?? '0';
+
+      return Pokemon(
+        name: element.name,
+        url: url,
+        id: int.parse(matchedId),
+      );
+    }).toList();
   }
 }

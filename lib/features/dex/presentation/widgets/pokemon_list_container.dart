@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/core/constants/pokedex_colors.dart';
+import 'package:pokedex/core/constants/pokedex_dimens.dart';
 
 class PokemonListContainer extends StatelessWidget {
   final Widget child;
@@ -9,11 +11,22 @@ class PokemonListContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.white),
+    return SizedBox.expand(
+      child: Container(
+        padding: const EdgeInsets.only(
+          left: PokedexDimens.small,
+          right: PokedexDimens.small,
+          top: PokedexDimens.xLarge,
+        ),
+        decoration: BoxDecoration(
+          color: PokedexColor.white,
+          border: Border.all(color: PokedexColor.white),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(PokedexDimens.large),
+          ),
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 }

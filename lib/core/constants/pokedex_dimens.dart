@@ -7,4 +7,10 @@ class PokedexDimens {
   static const double xxLarge = 32;
   static const double xxxLarge = 44;
   static const double xxxxLarge = 56;
+  //Fonts
+
+  static const double smallFont = 8;
+  static const double mediumFont = 12;
+  static const double largeFont = 16;
+  static const double xLargeFont = 24;
 }

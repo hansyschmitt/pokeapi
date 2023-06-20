@@ -3,7 +3,9 @@ import 'dart:ui';
 class PokedexColor {
   static const Color red = Color(0xFFDC0A2D);
   static const Color gray = Color(0xFFEFEFEF);
-  static const Color grayscale = Color(0xFF666666);
+  static const Color mediumGrayscale = Color(0xFF666666);
+  static const Color white = Color(0xFFFFFFFF);
+
   // Pokemon types
   static const Color bug = Color(0xFFA7B723);
   static const Color dark = Color(0xFF75574C);

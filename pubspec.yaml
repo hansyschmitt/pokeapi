@@ -27,3 +27,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/pokeball.png
+    - assets/no_pokemon.png
+    - assets/missingno.png

@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/core/constants/pokedex_colors.dart';
+import 'package:pokedex/core/constants/pokedex_dimens.dart';
 
 class PokedexTextStyles {
   static const TextStyle headline = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 24,
+    fontSize: PokedexDimens.xLargeFont,
     color: Colors.white,
   );
 
-  static TextStyle body = const TextStyle(
+  static const TextStyle body3 = TextStyle(
     fontWeight: FontWeight.w400,
-    fontSize: 16,
-    color: PokedexColor.grayscale,
+    fontSize: PokedexDimens.largeFont,
+    color: PokedexColor.mediumGrayscale,
+  );
+
+  static const TextStyle caption = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: PokedexDimens.mediumFont,
+    color: PokedexColor.mediumGrayscale,
   );
 }

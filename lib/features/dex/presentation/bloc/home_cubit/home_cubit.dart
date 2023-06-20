@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/features/dex/domain/repositories/pokemon_repository.dart';
-import 'package:pokedex/features/dex/presentation/bloc/home_state.dart';
+import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final PokemonRepository _pokemonRepository;
