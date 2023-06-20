@@ -8,6 +8,7 @@ class PokedexColor {
   static const Color white = Color(0xFFFFFFFF);
 
   // Pokemon types
+  static const Color none = Color(0xFF666666);
   static const Color bug = Color(0xFFA7B723);
   static const Color dark = Color(0xFF75574C);
   static const Color dragon = Color(0xFF7037FF);

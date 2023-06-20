@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/features/dex/domain/model/pokemon_short.dart';
 import 'package:pokedex/features/dex/domain/repositories/pokemon_repository.dart';
+import 'package:pokedex/features/dex/presentation/bloc/filter_cubit.dart/filter_mode.dart';
 import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -39,12 +40,13 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void setSort(bool sortType) {
+  void setSort(FilterMode filterMode) {
     final copyPk = pokemons;
-    if (!sortType) {
+    if (filterMode == FilterMode.number) {
       copyPk.sort((previous, next) => previous.id.compareTo(next.id));
+    } else {
+      copyPk.sort((previous, next) => previous.name.compareTo(next.name));
     }
-
     emit(SuccessHomeState(
       pokemons: copyPk,
     ));

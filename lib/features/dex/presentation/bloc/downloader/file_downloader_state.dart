@@ -8,7 +8,8 @@ class LoadingFileDownloaderState extends FileDownloaderState {}
 
 class SuccessFileDownloaderState extends FileDownloaderState {
   final Pokemon pokemon;
-  SuccessFileDownloaderState({required this.pokemon});
+  final int id;
+  SuccessFileDownloaderState({required this.id, required this.pokemon});
 }
 
 class FailureFileDownloaderState extends FileDownloaderState {}

@@ -10,6 +10,7 @@ import 'package:pokedex/features/dex/domain/repositories/pokemon_repository.dart
 
 class PokemonRemoteRepository extends PokemonRepository {
   final Dio dio;
+  final Map<int, Pokemon> pokemonCache = {};
 
   PokemonRemoteRepository({
     required this.dio,
@@ -31,16 +32,23 @@ class PokemonRemoteRepository extends PokemonRepository {
 
   @override
   Future<Either<Failure, Pokemon>> fetchPokemonData(int pokemonId) async {
-    try {
-      final result =
-          await dio.get('https://pokeapi.co/api/v2/pokemon/$pokemonId');
-      if (result.statusCode == 200) {
-        final data = result.data as Map<String, dynamic>;
-        return Right(PokemonDetailsResponse.fromJson(data).toPokemon());
+    if (pokemonCache.containsKey(pokemonId)) {
+      return Right(pokemonCache[pokemonId]!);
+    } else {
+      try {
+        final result =
+            await dio.get('https://pokeapi.co/api/v2/pokemon/$pokemonId');
+        if (result.statusCode == 200) {
+          final data = result.data as Map<String, dynamic>;
+          final pokemonDetails =
+              PokemonDetailsResponse.fromJson(data).toPokemon();
+          pokemonCache[pokemonId] = pokemonDetails;
+          return Right(pokemonDetails);
+        }
+        return Left(PokemonFailure('Error while parsing the API'));
+      } catch (e) {
+        return Left(PokemonFailure(e.toString()));
       }
-      return Left(PokemonFailure('Error while parsing the API'));
-    } catch (e) {
-      return Left(PokemonFailure(e.toString()));
     }
   }
 }

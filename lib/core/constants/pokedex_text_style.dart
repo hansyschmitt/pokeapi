@@ -9,6 +9,12 @@ class PokedexTextStyles {
     color: Colors.white,
   );
 
+  static const TextStyle subtitle2 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: PokedexDimens.largeFont,
+    color: Colors.white,
+  );
+
   static const TextStyle body3 = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: PokedexDimens.largeFont,

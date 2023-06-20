@@ -18,4 +18,7 @@ class PokemonShort {
         id: id ?? this.id,
         url: url ?? this.url,
       );
+
+  @override
+  String toString() => 'PokemonShort(name:$name, url:$url, id:$id)';
 }

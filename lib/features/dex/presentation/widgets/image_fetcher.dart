@@ -19,7 +19,7 @@ class ImageFetcher extends StatelessWidget {
       create: (_) => Injector.i.resolve<FileDownloaderCubit>(),
       child: Builder(builder: (context) {
         return BlocBuilder<FileDownloaderCubit, FileDownloaderState>(
-            bloc: context.read<FileDownloaderCubit>()..fetchImage(pokemonId),
+            bloc: context.read<FileDownloaderCubit>()..fetchDetails(pokemonId),
             builder: (context, state) {
               if (state is SuccessFileDownloaderState) {
                 return Image.network(

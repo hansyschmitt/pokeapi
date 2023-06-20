@@ -1,22 +1,18 @@
-abstract class FilterState {
+import 'package:pokedex/features/dex/presentation/bloc/filter_cubit.dart/filter_mode.dart';
+
+class FilterState {
   final String? filter;
-  FilterState({this.filter});
+  final FilterMode filterMode;
+  FilterState({
+    this.filter,
+    this.filterMode = FilterMode.number,
+  });
 
-  FilterState copyWith({String? filter});
-}
-
-class NameFilterState extends FilterState {
-  NameFilterState({String? filter}) : super(filter: filter);
-
-  @override
-  NameFilterState copyWith({String? filter}) =>
-      NameFilterState(filter: filter ?? this.filter);
-}
-
-class NumberFilterState extends FilterState {
-  NumberFilterState({String? filter}) : super(filter: filter);
-
-  @override
-  NumberFilterState copyWith({String? filter}) =>
-      NumberFilterState(filter: filter ?? this.filter);
+  FilterState copyWith({
+    String? filter,
+    FilterMode? filterMode,
+  }) =>
+      FilterState(
+          filter: filter ?? this.filter,
+          filterMode: filterMode ?? this.filterMode);
 }

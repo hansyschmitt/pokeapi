@@ -24,8 +24,8 @@ class InjectionManager {
   }
 
   static Future<void> _registerRepositories(Injector injector) async {
-    injector.registerFactory<PokemonRepository>(
-      () => PokemonRemoteRepository(
+    injector.registerSingleton<PokemonRepository>(
+      PokemonRemoteRepository(
         dio: injector.resolve(),
       ),
     );

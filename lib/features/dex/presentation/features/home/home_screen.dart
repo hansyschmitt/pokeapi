@@ -6,6 +6,7 @@ import 'package:pokedex/core/constants/pokedex_dimens.dart';
 import 'package:pokedex/features/dex/presentation/bloc/filter_cubit.dart/filter_cubit.dart';
 import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_cubit.dart';
 import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_state.dart';
+import 'package:pokedex/features/dex/presentation/features/detail/detail_screen.dart';
 import 'package:pokedex/features/dex/presentation/widgets/pokemon_listings/error_pokemon.dart';
 import 'package:pokedex/features/dex/presentation/widgets/pokemon_listings/no_pokemon_widget.dart';
 import 'package:pokedex/features/dex/presentation/widgets/pokemon_listings/pokemon_card.dart';
@@ -72,6 +73,14 @@ class HomeScreen extends StatelessWidget {
                             ),
                             itemBuilder: (context, index) => PokemonCard(
                               pokemon: state.pokemons[index],
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailScreen(
+                                    pokemonId: state.pokemons[index].id,
+                                  ),
+                                ),
+                              ),
                             ),
                           );
                         }
