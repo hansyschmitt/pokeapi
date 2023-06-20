@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/presentation/features/detail/detail_screen.dart';
+import 'package:pokedex/features/dex/presentation/features/detail/detail_screen.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key});
