@@ -3,14 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/core/constants/pokedex_colors.dart';
 import 'package:pokedex/core/constants/pokedex_constants.dart';
 import 'package:pokedex/core/constants/pokedex_dimens.dart';
+import 'package:pokedex/features/dex/presentation/bloc/filter_cubit.dart/filter_cubit.dart';
 import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_cubit.dart';
 import 'package:pokedex/features/dex/presentation/bloc/home_cubit/home_state.dart';
-import 'package:pokedex/features/dex/presentation/widgets/error_pokemon.dart';
-import 'package:pokedex/features/dex/presentation/widgets/no_pokemon_widget.dart';
-import 'package:pokedex/features/dex/presentation/widgets/pokemon_card.dart';
-import 'package:pokedex/features/dex/presentation/widgets/pokemon_list_container.dart';
+import 'package:pokedex/features/dex/presentation/widgets/pokemon_listings/error_pokemon.dart';
+import 'package:pokedex/features/dex/presentation/widgets/pokemon_listings/no_pokemon_widget.dart';
+import 'package:pokedex/features/dex/presentation/widgets/pokemon_listings/pokemon_card.dart';
+import 'package:pokedex/features/dex/presentation/widgets/pokemon_listings/pokemon_list_container.dart';
 import 'package:pokedex/features/dex/presentation/widgets/search_bar/pokemon_search_bar.dart';
-import 'package:pokedex/features/dex/presentation/widgets/pokemon_title_bar.dart';
+import 'package:pokedex/features/dex/presentation/widgets/title_bar/pokemon_title_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,16 +25,18 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: PokedexDimens.large),
+              Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: PokedexDimens.large),
                   child: Column(
                     children: [
-                      PokemonTitleBar(),
-                      SizedBox(height: PokedexDimens.small),
+                      const PokemonTitleBar(),
+                      const SizedBox(height: PokedexDimens.small),
                       PokemonSearchBar(
                         hintText: 'Search',
-                        leading: Icon(
+                        onChanged: (filter) =>
+                            context.read<FilterCubit>().setFilter(filter),
+                        leading: const Icon(
                           Icons.search,
                           color: PokedexColor.red,
                         ),

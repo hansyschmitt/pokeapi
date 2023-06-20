@@ -1,24 +1,33 @@
 class Pokemon {
   final String name;
-  final String? details;
-  final String url;
   final int id;
+  final String officialArtwork;
+  final String mainImage;
+  final String sprite;
+
   Pokemon({
     required this.name,
-    required this.url,
-    this.details,
+    required this.mainImage,
+    required this.sprite,
+    required this.officialArtwork,
     this.id = 0,
   });
 
   Pokemon copyWith({
     String? name,
-    String? url,
+    String? officialArtwork,
+    String? mainImage,
+    String? sprite,
     int? id,
   }) =>
       Pokemon(
-        name: name ?? this.name,
         id: id ?? this.id,
-        url: url ?? this.url,
-        details: details,
+        officialArtwork: officialArtwork ?? this.officialArtwork,
+        name: name ?? this.name,
+        sprite: sprite ?? this.sprite,
+        mainImage: mainImage ?? this.mainImage,
       );
+
+  @override
+  String toString() => 'Pokemon(id:$id, name::$name, mainImage: $mainImage)';
 }

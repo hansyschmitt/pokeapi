@@ -1,4 +1,4 @@
-import 'package:pokedex/features/dex/domain/model/pokemon.dart';
+import 'package:pokedex/features/dex/domain/model/pokemon_short.dart';
 
 abstract class HomeState {}
 
@@ -11,6 +11,6 @@ class LoadingHomeState extends HomeState {}
 class ErrorHomeState extends HomeState {}
 
 class SuccessHomeState extends HomeState {
-  final List<Pokemon> pokemons;
+  final List<PokemonShort> pokemons;
   SuccessHomeState({required this.pokemons});
 }

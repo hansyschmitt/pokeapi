@@ -1,5 +1,5 @@
 import 'package:pokedex/features/dex/data/entities/pokemon_response.dart';
-import 'package:pokedex/features/dex/domain/model/pokemon.dart';
+import 'package:pokedex/features/dex/domain/model/pokemon_short.dart';
 
 class PokemonResultResponse {
   final int count;
@@ -26,13 +26,13 @@ class PokemonResultResponse {
     );
   }
 
-  List<Pokemon> toPokemonList() {
+  List<PokemonShort> toPokemonList() {
     return pokemons.map((element) {
       final url = element.url ?? '';
       final matchedId =
           RegExp(r'pokemon/([0-9]+)/').firstMatch(url)?.group(1) ?? '0';
 
-      return Pokemon(
+      return PokemonShort(
         name: element.name,
         url: url,
         id: int.parse(matchedId),
